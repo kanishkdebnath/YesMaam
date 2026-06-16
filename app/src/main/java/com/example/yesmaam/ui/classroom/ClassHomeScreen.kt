@@ -22,11 +22,18 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.List
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.yesmaam.di.appContainer
 
 private enum class Tab(val label: String) { TODAY("Today"), CALENDAR("Calendar"), STUDENTS("Students"), REPORTS("Reports") }
 
 @Composable
 fun ClassHomeScreen(classId: Long, onEditClass: () -> Unit, onEditStudent: (Long?) -> Unit) {
+    val container = LocalContext.current.appContainer
+    val classEntity by container.repository.observeClass(classId)
+        .collectAsStateWithLifecycle(initialValue = null)
+    val colorKey = classEntity?.colorKey ?: "sage"
     var tab by remember { mutableIntStateOf(0) }
     Scaffold(
         bottomBar = {
@@ -58,7 +65,7 @@ fun ClassHomeScreen(classId: Long, onEditClass: () -> Unit, onEditStudent: (Long
     ) { pad ->
         Box(Modifier.fillMaxSize().padding(pad)) {
             when (Tab.entries[tab]) {
-                Tab.TODAY -> TodayTabStub()        // replaced in Task 20
+                Tab.TODAY -> com.example.yesmaam.ui.classroom.today.TodayScreen(classId, colorKey)
                 Tab.CALENDAR -> CalendarTabStub()  // replaced in Task 21
                 Tab.STUDENTS -> StudentsTabStub()  // replaced in Task 22
                 Tab.REPORTS -> ReportsTabStub()    // replaced in Task 23
@@ -67,7 +74,6 @@ fun ClassHomeScreen(classId: Long, onEditClass: () -> Unit, onEditStudent: (Long
     }
 }
 
-@Composable private fun TodayTabStub() = Center("Today")
 @Composable private fun CalendarTabStub() = Center("Calendar")
 @Composable private fun StudentsTabStub() = Center("Students")
 @Composable private fun ReportsTabStub() = Center("Reports")
