@@ -14,8 +14,13 @@ import androidx.navigation.compose.rememberNavController
 fun YesMaamNavGraph() {
     val nav = rememberNavController()
     NavHost(navController = nav, startDestination = Routes.CLASSES) {
-        composable(Routes.CLASSES) { Placeholder("Classes") }
-        composable(Routes.SETTINGS) { Placeholder("Settings") }
+        composable(Routes.CLASSES) {
+            com.example.yesmaam.ui.classes.ClassesScreen(
+                onOpenClass = { id -> nav.navigate(Routes.classHome(id)) },
+                onNewClass = { nav.navigate(Routes.classEditor(null)) },
+            )
+        }
+        // class editor, class home, settings composables are added in later tasks.
     }
 }
 

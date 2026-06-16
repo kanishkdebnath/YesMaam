@@ -22,4 +22,7 @@ interface HolidayDao {
 
     @Query("SELECT COUNT(*) FROM holidays WHERE classId = :classId AND date = :day")
     fun observeIsHoliday(classId: Long, day: Long): Flow<Int>
+
+    @Query("SELECT classId FROM holidays WHERE date = :day")
+    fun observeClassIdsOnHoliday(day: Long): kotlinx.coroutines.flow.Flow<List<Long>>
 }

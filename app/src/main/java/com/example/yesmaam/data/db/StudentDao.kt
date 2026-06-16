@@ -23,4 +23,9 @@ interface StudentDao {
     @Insert suspend fun insert(s: StudentEntity): Long
     @Update suspend fun update(s: StudentEntity)
     @Delete suspend fun delete(s: StudentEntity)
+
+    data class ClassCount(val classId: Long, val n: Int)
+
+    @Query("SELECT classId, COUNT(*) AS n FROM students GROUP BY classId")
+    fun observeCounts(): kotlinx.coroutines.flow.Flow<List<ClassCount>>
 }

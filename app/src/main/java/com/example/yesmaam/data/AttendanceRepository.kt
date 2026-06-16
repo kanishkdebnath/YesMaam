@@ -20,6 +20,12 @@ class AttendanceRepository(private val db: AppDatabase) {
     suspend fun updateClass(c: ClassEntity) = db.classDao().update(c)
     suspend fun deleteClass(c: ClassEntity) = db.classDao().delete(c)
 
+    fun observeStudentCounts() = db.studentDao().observeCounts()
+    fun observeClassIdsWithAttendance(date: java.time.LocalDate) =
+        db.attendanceDao().observeClassIdsWithAttendance(date.toEpochDay())
+    fun observeClassIdsOnHoliday(date: java.time.LocalDate) =
+        db.holidayDao().observeClassIdsOnHoliday(date.toEpochDay())
+
     // ----- students -----
     fun observeStudents(classId: Long): Flow<List<StudentEntity>> =
         db.studentDao().observeByClass(classId)

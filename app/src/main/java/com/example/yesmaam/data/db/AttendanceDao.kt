@@ -40,4 +40,12 @@ interface AttendanceDao {
         """
     )
     fun observeForClassDay(classId: Long, day: Long): Flow<List<AttendanceEntity>>
+
+    @Query(
+        """
+        SELECT DISTINCT s.classId FROM attendance a
+        INNER JOIN students s ON s.id = a.studentId WHERE a.date = :day
+        """
+    )
+    fun observeClassIdsWithAttendance(day: Long): kotlinx.coroutines.flow.Flow<List<Long>>
 }
