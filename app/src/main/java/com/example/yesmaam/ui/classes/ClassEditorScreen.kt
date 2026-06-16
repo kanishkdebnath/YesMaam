@@ -72,7 +72,7 @@ fun ClassEditorScreen(classId: Long?, onDone: () -> Unit) {
                 }
             }
 
-            PrimaryButton(if (classId == null) "Create class" else "Save", onClick = { if (vm.canSave) vm.save(onDone) })
+            PrimaryButton(if (classId == null) "Create class" else "Save", onClick = { if (vm.canSave) vm.save(onDone) }, enabled = ui.name.isNotBlank())
             if (classId != null) GhostButton("Delete class", onClick = { vm.delete(onDone) })
         }
     }

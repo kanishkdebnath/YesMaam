@@ -15,13 +15,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.yesmaam.di.appContainer
@@ -48,7 +47,7 @@ fun ClassHomeScreen(classId: Long, onEditClass: () -> Unit, onEditStudent: (Long
                                     Tab.TODAY -> Icons.Filled.CheckCircle
                                     Tab.CALENDAR -> Icons.Filled.DateRange
                                     Tab.STUDENTS -> Icons.Filled.Person
-                                    Tab.REPORTS -> Icons.Filled.List
+                                    Tab.REPORTS -> Icons.AutoMirrored.Filled.List
                                 }, contentDescription = t.label,
                             )
                         },
@@ -73,5 +72,3 @@ fun ClassHomeScreen(classId: Long, onEditClass: () -> Unit, onEditStudent: (Long
         }
     }
 }
-
-@Composable private fun Center(s: String) = Box(Modifier.fillMaxSize(), Alignment.Center) { Text(s) }

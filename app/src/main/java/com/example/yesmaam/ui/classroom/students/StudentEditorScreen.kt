@@ -33,7 +33,7 @@ fun StudentEditorScreen(classId: Long, studentId: Long?, onDone: () -> Unit) {
             Field("Full name", ui.name, vm::onName)
             Field("Roll number", ui.roll, vm::onRoll)
             Field("Guardian phone (optional)", ui.phone, vm::onPhone)
-            PrimaryButton("Save student", onClick = { if (vm.canSave) vm.save(onDone) })
+            PrimaryButton("Save student", onClick = { if (vm.canSave) vm.save(onDone) }, enabled = ui.name.isNotBlank() && ui.roll.isNotBlank())
             if (studentId != null) GhostButton("Delete student", onClick = { vm.delete(onDone) })
         }
     }
