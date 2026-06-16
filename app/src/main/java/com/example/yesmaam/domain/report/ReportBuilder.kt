@@ -6,7 +6,7 @@ import kotlin.math.roundToInt
 
 fun buildMonthlyReport(inputs: ReportInputs): MonthlyReport {
     val month = inputs.month
-    fun inMonth(date: LocalDate) = YearMonthMatches(date, month)
+    fun inMonth(date: LocalDate) = yearMonthMatches(date, month)
 
     val holidaySet = inputs.holidays.filter { inMonth(it) }.toSet()
 
@@ -54,5 +54,5 @@ fun buildMonthlyReport(inputs: ReportInputs): MonthlyReport {
     )
 }
 
-private fun YearMonthMatches(date: LocalDate, month: java.time.YearMonth): Boolean =
+private fun yearMonthMatches(date: LocalDate, month: java.time.YearMonth): Boolean =
     date.year == month.year && date.monthValue == month.monthValue

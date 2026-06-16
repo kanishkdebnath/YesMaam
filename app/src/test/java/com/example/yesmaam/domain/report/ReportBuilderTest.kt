@@ -67,6 +67,29 @@ class ReportBuilderTest {
         assertEquals(50, bobRow.percentage)
     }
 
+    @Test fun `holiday overrides a stray attendance record on that day`() {
+        // A record exists on the 5th, but the 5th is a holiday: it must not count as a
+        // session, must not appear in statusByDate, and must not inflate any tally.
+        val att = listOf(
+            AttendanceRecord(1, d(3), PRESENT),
+            AttendanceRecord(1, d(4), PRESENT),
+            AttendanceRecord(1, d(5), PRESENT), // stray record on a holiday
+        )
+        val report = buildMonthlyReport(inputs(listOf(ann), att, holidays = listOf(d(5))))
+        val row = report.rows.single()
+        assertEquals(listOf(d(3), d(4)), report.sessionDates)
+        assertEquals(setOf(d(3), d(4)), row.statusByDate.keys) // holiday day excluded
+        assertEquals(2, row.presentCount)
+        assertEquals(0, row.absentCount)
+        assertEquals(100, row.percentage) // present on both sessions; holiday ignored
+    }
+
+    @Test fun `empty roster yields zero average`() {
+        val report = buildMonthlyReport(inputs(emptyList(), emptyList()))
+        assertEquals(0, report.summary.studentCount)
+        assertEquals(0, report.summary.averagePercentage)
+    }
+
     @Test fun `empty month yields zero percentages`() {
         val report = buildMonthlyReport(inputs(listOf(ann), emptyList()))
         assertEquals(0, report.summary.sessionCount)
