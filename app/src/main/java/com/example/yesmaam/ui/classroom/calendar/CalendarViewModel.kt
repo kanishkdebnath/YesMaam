@@ -23,8 +23,7 @@ class CalendarViewModel(private val container: AppContainer, private val classId
     val today: LocalDate = LocalDate.now()
 
     data class Selected(val date: LocalDate, val isHoliday: Boolean, val hasSession: Boolean)
-    private val _selected = MutableStateFlow<Selected?>(null)
-    val selected: StateFlow<Selected?> = _selected
+    private val _selectedDate = MutableStateFlow<LocalDate?>(null)
 
     val marks: StateFlow<Map<LocalDate, DayMark>> = _month.flatMapLatest { m ->
         combine(repo.observeMonth(classId, m), repo.observeHolidays(classId, m)) { attendance, holidays ->
@@ -37,18 +36,20 @@ class CalendarViewModel(private val container: AppContainer, private val classId
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyMap())
 
+    // Derived from marks so the action panel self-corrects when the DB write re-emits
+    // (e.g. it flips to "Holiday" the instant marking lands, without a re-tap).
+    val selected: StateFlow<Selected?> = combine(_selectedDate, marks) { date, ms ->
+        date?.let { d ->
+            val m = ms[d]
+            Selected(d, m == DayMark.HOLIDAY, m == DayMark.TAKEN)
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+
     fun prevMonth() { _month.value = _month.value.minusMonths(1) }
     fun nextMonth() { _month.value = _month.value.plusMonths(1) }
 
-    fun selectDay(date: LocalDate) {
-        val m = marks.value[date]
-        _selected.value = Selected(date, m == DayMark.HOLIDAY, m == DayMark.TAKEN)
-    }
+    fun selectDay(date: LocalDate) { _selectedDate.value = date }
 
-    fun markHoliday(date: LocalDate) = viewModelScope.launch {
-        repo.markHoliday(classId, date); selectDay(date)
-    }
-    fun removeHoliday(date: LocalDate) = viewModelScope.launch {
-        repo.removeHoliday(classId, date); selectDay(date)
-    }
+    fun markHoliday(date: LocalDate) = viewModelScope.launch { repo.markHoliday(classId, date) }
+    fun removeHoliday(date: LocalDate) = viewModelScope.launch { repo.removeHoliday(classId, date) }
 }
