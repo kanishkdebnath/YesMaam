@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AttendanceDao {
+    // REPLACE upserts on the unique (studentId, date) index: re-marking a day swaps
+    // the row (a new auto-id). Intentional — nothing references attendance.id.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(records: List<AttendanceEntity>)
 
