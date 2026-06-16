@@ -20,6 +20,7 @@ fun YesMaamNavGraph() {
             com.example.yesmaam.ui.classes.ClassesScreen(
                 onOpenClass = { id -> nav.navigate(Routes.classHome(id)) },
                 onNewClass = { nav.navigate(Routes.classEditor(null)) },
+                onOpenSettings = { nav.navigate(Routes.SETTINGS) },
             )
         }
         composable(
@@ -51,7 +52,9 @@ fun YesMaamNavGraph() {
             val sid = entry.arguments?.getLong("studentId")?.takeIf { it >= 0 }
             com.example.yesmaam.ui.classroom.students.StudentEditorScreen(cid, sid, onDone = { nav.popBackStack() })
         }
-        // settings composable is added in a later task.
+        composable(Routes.SETTINGS) {
+            com.example.yesmaam.ui.settings.SettingsScreen(onDone = { nav.popBackStack() })
+        }
     }
 }
 
