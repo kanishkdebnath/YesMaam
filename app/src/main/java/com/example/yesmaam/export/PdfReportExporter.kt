@@ -2,7 +2,6 @@ package com.example.yesmaam.export
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import androidx.core.content.res.ResourcesCompat
@@ -90,6 +89,4 @@ class PdfReportExporter(private val context: Context) : ReportExporter {
 
     private fun Paint.alignLeftHead(): Paint =
         Paint(this).apply { typeface = fraunces; textSize = 8f; textAlign = Paint.Align.LEFT; color = 0xFF3E3A35.toInt() }
-
-    @Suppress("unused") private val keepColor = Color.BLACK // ensures Color import retained
 }
