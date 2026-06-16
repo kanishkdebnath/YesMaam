@@ -205,9 +205,14 @@ first tap). If today is a holiday, the list is replaced by a holiday state with
 **B2 · Calendar.** Month grid (Mon–Sun columns, no weekend special-casing in
 logic). Cell states: taken (sage), holiday (peach ☂), today (ring), empty/future
 (muted). Month `‹ / ›` navigation. Legend below. Tapping a day:
-- empty past/today → opens that day's register (same component as Today, for the
-  selected date) with a "Mark holiday" option;
+- empty past/today → "Mark holiday" option;
 - holiday → shows holiday + "Remove holiday".
+
+> **v1 status (amended 2026-06-17):** the calendar marks/removes holidays and
+> shows session state. Back-dated attendance editing (opening a non-today day's
+> register from the calendar) is deferred — `repo.saveDay(date, …)` already accepts
+> any date, so wiring a date-parameterised register later is small. Today's
+> attendance is taken from the **Today** tab.
 
 **C1 · Students.** Roster for this class: avatar, name, roll · ☎ guardian ·
 this-month %. "Add a student". Tap a row → Student editor.
