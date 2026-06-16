@@ -67,13 +67,12 @@ fun ClassHomeScreen(classId: Long, onEditClass: () -> Unit, onEditStudent: (Long
             when (Tab.entries[tab]) {
                 Tab.TODAY -> com.example.yesmaam.ui.classroom.today.TodayScreen(classId, colorKey)
                 Tab.CALENDAR -> com.example.yesmaam.ui.classroom.calendar.CalendarScreen(classId)
-                Tab.STUDENTS -> StudentsTabStub()  // replaced in Task 22
+                Tab.STUDENTS -> com.example.yesmaam.ui.classroom.students.StudentsScreen(classId, colorKey, onEditStudent)
                 Tab.REPORTS -> ReportsTabStub()    // replaced in Task 23
             }
         }
     }
 }
 
-@Composable private fun StudentsTabStub() = Center("Students")
 @Composable private fun ReportsTabStub() = Center("Reports")
 @Composable private fun Center(s: String) = Box(Modifier.fillMaxSize(), Alignment.Center) { Text(s) }

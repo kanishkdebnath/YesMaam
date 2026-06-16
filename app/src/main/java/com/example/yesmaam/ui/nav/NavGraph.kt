@@ -40,6 +40,17 @@ fun YesMaamNavGraph() {
                 onEditStudent = { sid -> nav.navigate(Routes.studentEditor(id, sid)) },
             )
         }
+        composable(
+            Routes.STUDENT_EDITOR,
+            arguments = listOf(
+                navArgument("classId") { type = NavType.LongType },
+                navArgument("studentId") { type = NavType.LongType; defaultValue = -1L },
+            ),
+        ) { entry ->
+            val cid = entry.arguments!!.getLong("classId")
+            val sid = entry.arguments?.getLong("studentId")?.takeIf { it >= 0 }
+            com.example.yesmaam.ui.classroom.students.StudentEditorScreen(cid, sid, onDone = { nav.popBackStack() })
+        }
         // settings composable is added in a later task.
     }
 }
