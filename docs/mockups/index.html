@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YesMaam — Attendance · Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#FBF7F0; --paper:#FFFDFA; --ink:#3E3A35; --ink-soft:#9A9086;
+    --sage:#B7CBB0; --sage-deep:#6E8C66; --sage-tint:#EAF1E7;
+    --blush:#E9BFC1; --blush-deep:#B9777B; --blush-tint:#FBEDED;
+    --peach:#F2D2A9; --peach-deep:#C68E4F; --peach-tint:#FBF0E0;
+    --lav:#D3CBE4; --lav-deep:#8C7FAE; --lav-tint:#F1EEF7;
+    --line:#ECE3D6; --shadow:0 18px 40px -18px rgba(62,58,53,.30);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 12% -5%, #F3EFE6 0%, transparent 60%),
+      radial-gradient(1000px 700px at 100% 0%, #F6EEEC 0%, transparent 55%),
+      var(--cream);
+    color:var(--ink); font-family:'Lora', Georgia, serif;
+    -webkit-font-smoothing:antialiased; padding:56px 28px 90px; line-height:1.5;
+  }
+  .wrap{max-width:1320px;margin:0 auto}
+  .masthead{text-align:center;margin-bottom:8px}
+  .kicker{font-family:'Lora',serif;font-style:italic;color:var(--blush-deep);letter-spacing:.06em;font-size:15px;margin-bottom:10px}
+  h1.title{font-family:'Fraunces',serif;font-weight:600;font-size:54px;letter-spacing:-.02em;line-height:1.02}
+  .sub{max-width:640px;margin:16px auto 0;color:var(--ink-soft);font-size:16px}
+  .note{max-width:740px;margin:26px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px;font-size:14.5px;color:#6f675e;box-shadow:var(--shadow)}
+  .note b{color:var(--ink);font-weight:600}
+
+  .stage{margin-top:48px}
+  .row-label{font-family:'Fraunces',serif;font-size:22px;font-weight:600;margin:46px 0 4px;display:flex;align-items:baseline;gap:12px}
+  .row-label .n{font-size:14px;color:var(--blush-deep);font-style:italic;font-family:'Lora',serif;font-weight:400}
+  .row-desc{color:var(--ink-soft);font-size:14.5px;margin-bottom:22px;max-width:680px}
+  .gallery{display:flex;flex-wrap:wrap;gap:38px;align-items:flex-start}
+
+  .phone{width:300px;flex:0 0 auto}
+  .screen{width:300px;height:632px;background:var(--cream);border-radius:38px;border:9px solid #2c2924;box-shadow:var(--shadow);overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#2c2924;border-radius:0 0 16px 16px;z-index:30}
+  .caption{text-align:center;margin-top:14px;font-style:italic;color:var(--ink-soft);font-size:13.5px}
+
+  .statusbar{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 22px 0 24px;font-size:12px;color:var(--ink-soft);flex:0 0 auto}
+  .appbar{padding:18px 20px 8px;flex:0 0 auto}
+  .app-hello{font-size:12.5px;color:var(--ink-soft);font-style:italic}
+  .app-h{font-family:'Fraunces',serif;font-weight:600;font-size:24px;letter-spacing:-.01em;margin-top:2px}
+  .body{flex:1 1 auto;overflow:hidden;padding:4px 18px 0;position:relative}
+  .scrollfade{position:absolute;left:0;right:0;bottom:60px;height:30px;background:linear-gradient(transparent,var(--cream));pointer-events:none;z-index:5}
+
+  .pillrow{display:flex;gap:8px;padding:2px 20px 10px;flex:0 0 auto;overflow:hidden}
+  .pill{font-size:12.5px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink-soft);white-space:nowrap}
+  .pill.on{background:var(--sage-deep);color:#fff;border-color:var(--sage-deep)}
+
+  /* class hub cards */
+  .ccard{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:13px 14px;margin-bottom:12px}
+  .cemoji{width:46px;height:46px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:22px}
+  .cmeta{flex:1 1 auto;min-width:0}
+  .cname{font-family:'Fraunces',serif;font-size:16px;font-weight:600;line-height:1.1}
+  .cinfo{font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+  .cstate{font-size:10.5px;padding:4px 9px;border-radius:999px;white-space:nowrap;font-style:italic}
+  .cstate.done{background:var(--sage-tint);color:var(--sage-deep)}
+  .cstate.todo{background:var(--lav-tint);color:var(--lav-deep)}
+  .cstate.hol{background:var(--peach-tint);color:var(--peach-deep)}
+
+  /* student rows */
+  .srow{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:11px 12px 11px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .avatar{width:34px;height:34px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:14px;color:#fff}
+  .who{flex:1 1 auto;min-width:0}
+  .who .nm{font-size:14.5px;font-weight:500;line-height:1.15}
+  .who .rl{font-size:11.5px;color:var(--ink-soft)}
+
+  .seg{display:flex;gap:5px;flex:0 0 auto}
+  .seg .b{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--ink-soft);font-family:'Fraunces',serif}
+  .seg .b.p{background:var(--sage);border-color:var(--sage-deep);color:#39532f}
+  .seg .b.a{background:var(--blush);border-color:var(--blush-deep);color:#6f2f33}
+  .seg .b.l{background:var(--peach);border-color:var(--peach-deep);color:#7a4f17}
+
+  .summary{display:flex;gap:8px;margin:2px 0 12px;flex-wrap:wrap}
+  .chip{font-size:12px;padding:5px 11px;border-radius:999px;display:flex;align-items:center;gap:6px}
+  .chip .dot{width:8px;height:8px;border-radius:50%}
+  .chip.s{background:var(--sage-tint);color:var(--sage-deep)}
+  .chip.b{background:var(--blush-tint);color:var(--blush-deep)}
+  .chip.p{background:var(--peach-tint);color:var(--peach-deep)}
+
+  .holbar{display:flex;align-items:center;gap:8px;background:var(--peach-tint);border:1px dashed var(--peach-deep);border-radius:12px;padding:9px 12px;margin-bottom:12px;font-size:12.5px;color:var(--peach-deep);font-style:italic}
+  .holbar b{font-style:normal;font-weight:600;margin-left:auto;font-family:'Fraunces',serif}
+
+  .nav{flex:0 0 auto;height:60px;background:var(--paper);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-around;padding:0 4px}
+  .nav a{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-soft);font-size:10px}
+  .nav a.on{color:var(--sage-deep)}
+  .nav .ic{font-size:16px;line-height:1}
+
+  .cta{margin:6px 0 4px;background:var(--sage-deep);color:#fff;text-align:center;padding:13px;border-radius:14px;font-size:14.5px;font-weight:500;font-family:'Lora',serif;box-shadow:0 10px 20px -10px rgba(110,140,102,.8)}
+  .cta.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+
+  .field{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:11px 13px;margin-bottom:10px}
+  .field .lab{font-size:11px;color:var(--ink-soft);font-style:italic}
+  .field .val{font-size:15px;margin-top:3px}
+  .field .val.ph{color:#C9C0B4}
+  .picker{display:flex;gap:8px;margin:3px 2px 12px}
+  .swic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;border:1px solid var(--line)}
+  .swic.on{outline:2px solid var(--ink);outline-offset:1px}
+  .swcol{width:26px;height:26px;border-radius:50%;border:1px solid rgba(0,0,0,.08)}
+  .swcol.on{outline:2px solid var(--ink);outline-offset:2px}
+
+  .selector{display:flex;align-items:center;justify-content:space-between;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 15px;margin-bottom:12px}
+  .selector .mm{font-family:'Fraunces',serif;font-size:18px;font-weight:600}
+  .selector .arrows{color:var(--ink-soft);font-size:15px;letter-spacing:8px}
+
+  .statline{display:flex;gap:9px;margin-bottom:14px}
+  .stat{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center}
+  .stat .big{font-family:'Fraunces',serif;font-size:23px;font-weight:600;line-height:1}
+  .stat .lab{font-size:10px;color:var(--ink-soft);margin-top:5px;font-style:italic}
+
+  .rrow{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line)}
+  .rrow .nm{flex:1;font-size:13.5px}
+  .bar{width:78px;height:7px;border-radius:99px;background:var(--sage-tint);overflow:hidden;flex:0 0 auto}
+  .bar i{display:block;height:100%;background:var(--sage-deep)}
+  .pct{font-size:12.5px;color:var(--ink-soft);width:34px;text-align:right;font-family:'Fraunces',serif}
+
+  .exports{display:flex;gap:10px;margin-top:14px}
+  .exp{flex:1;border-radius:14px;padding:13px 10px;text-align:center;border:1px solid var(--line)}
+  .exp.xls{background:var(--sage-tint);color:var(--sage-deep)}
+  .exp.pdf{background:var(--blush-tint);color:var(--blush-deep)}
+  .exp .t{font-family:'Fraunces',serif;font-weight:600;font-size:14px}
+  .exp .s{font-size:10.5px;opacity:.8;margin-top:2px}
+
+  /* calendar */
+  .calhead{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+  .calhead span{text-align:center;font-size:10px;color:var(--ink-soft);font-style:italic}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+  .cell{height:38px;border-radius:10px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12px;position:relative}
+  .cell .d{line-height:1}
+  .cell .mk{width:5px;height:5px;border-radius:50%}
+  .cell.has{background:var(--sage-tint);border-color:#D6E4D0;color:#42603a}
+  .cell.has .mk{background:var(--sage-deep)}
+  .cell.hol{background:var(--peach-tint);border-color:#EBD7B6;color:var(--peach-deep)}
+  .cell.hol .g{font-size:11px;line-height:1}
+  .cell.wknd{background:transparent;border-color:transparent;color:#C7BDAE}
+  .cell.future{color:#C7BDAE}
+  .cell.today{outline:2px solid var(--sage-deep);outline-offset:0;font-weight:700;color:var(--ink)}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;justify-content:center}
+  .lg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-soft)}
+  .lg .sw{width:13px;height:13px;border-radius:4px;border:1px solid var(--line)}
+  .daysheet{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 13px}
+  .daysheet .dt{font-family:'Fraunces',serif;font-size:14px;font-weight:600;margin-bottom:9px}
+  .daysheet .act{display:flex;gap:8px}
+  .act .a{flex:1;text-align:center;font-size:12px;padding:9px;border-radius:10px;border:1px solid var(--line)}
+  .act .a.take{background:var(--sage-tint);color:var(--sage-deep)}
+  .act .a.hol{background:var(--peach-tint);color:var(--peach-deep)}
+
+  /* pdf */
+  .pdfpage{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 15px;box-shadow:0 8px 20px -12px rgba(0,0,0,.2)}
+  .pdf-h{text-align:center;border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:10px}
+  .pdf-h .sch{font-family:'Fraunces',serif;font-size:16px;font-weight:600}
+  .pdf-h .meta{font-size:10px;color:var(--ink-soft);margin-top:2px}
+  table.grid{width:100%;border-collapse:collapse;font-size:8.5px}
+  table.grid th,table.grid td{border:1px solid var(--line);padding:2px 0;text-align:center}
+  table.grid th{font-family:'Fraunces',serif;font-weight:600;background:#FAF6EF}
+  table.grid td.name{text-align:left;padding-left:4px;white-space:nowrap;font-size:8px}
+  td.P{color:var(--sage-deep);font-weight:600}
+  td.A{color:var(--blush-deep);font-weight:600}
+  td.H{color:var(--peach-deep);background:var(--peach-tint)}
+  td.tot{font-family:'Fraunces',serif;font-weight:600}
+  .pdf-foot{display:flex;justify-content:space-between;font-size:9px;color:var(--ink-soft);margin-top:9px}
+
+  .panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:34px}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+  .panel h3{font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin-bottom:14px}
+  .swatches{display:flex;flex-direction:column;gap:9px}
+  .sw2{display:flex;align-items:center;gap:12px;font-size:13px}
+  .sw2 .chipc{width:40px;height:28px;border-radius:8px;border:1px solid rgba(0,0,0,.06);flex:0 0 auto}
+  .sw2 code{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--ink-soft);margin-left:auto}
+  .type-spec p{margin-bottom:10px}
+  .t-display{font-family:'Fraunces',serif;font-size:30px;font-weight:600;letter-spacing:-.01em}
+  .t-head{font-family:'Fraunces',serif;font-size:20px;font-weight:600}
+  .t-body{font-family:'Lora',serif;font-size:15px}
+  .t-cap{font-family:'Lora',serif;font-style:italic;font-size:13px;color:var(--ink-soft)}
+  ul.feat{list-style:none;display:flex;flex-direction:column;gap:10px}
+  ul.feat li{padding-left:22px;position:relative;font-size:14px}
+  ul.feat li:before{content:'✦';position:absolute;left:0;color:var(--blush-deep)}
+  .q{color:var(--peach-deep);font-style:italic}
+  .ok{color:var(--sage-deep)}
+  footer{text-align:center;margin-top:60px;color:var(--ink-soft);font-size:13px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="kicker">a quiet little attendance book</div>
+    <h1 class="title">YesMaam</h1>
+    <p class="sub">Keep a class for anything — a school section, a pottery course, a weekend workshop. Tap who's here, mark the holidays, and at month's end hand out a tidy Excel sheet or printable PDF.</p>
+  </div>
+
+  <div class="note">
+    <b>Updated from your notes:</b> classes are now generic (school <i>or</i> pottery <i>or</i> anything) with their own setup screen, holidays are markable and shown clearly on a calendar, plus your confirmed calls — <span class="ok">Late state ✓, auto‑save on tap ✓, roll no. + guardian phone ✓</span>. Open items are still flagged <span class="q">in peach</span>.
+  </div>
+
+  <!-- ============ ROW A: CLASSES ============ -->
+  <div class="stage">
+    <div class="row-label">Start here — your classes <span class="n">— each one its own little register</span></div>
+    <div class="row-desc">The home screen is a shelf of classes. A class is just “a named group of people you take attendance for” — give it a name, a colour, an emoji, and you're set. Tap one to step inside it.</div>
+
+    <div class="gallery">
+
+      <!-- A1: Classes hub -->
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>✦ ✦ ✦</span></div>
+        <div class="appbar"><div class="app-hello">good morning, Kanishk</div><div class="app-h">Your Classes</div></div>
+        <div class="body" style="padding-top:8px">
+          <div class="ccard">
+            <div class="cemoji" style="background:var(--sage-tint)">📕</div>
+            <div class="cmeta"><div class="cname">Class VI‑A</div><div class="cinfo">30 students · school</div></div>
+            <div class="cstate todo">not yet</div>
+          </div>
+          <div class="ccard">
+            <div class="cemoji" style="background:var(--lav-tint)">📗</div>
+            <div class="cmeta"><div class="cname">Class VI‑B</div><div class="cinfo">28 students · school</div></div>
+            <div class="cstate done">✓ done</div>
+          </div>
+          <div class="ccard">
+            <div class="cemoji" style="background:var(--peach-tint)">🏺</div>
+            <div class="cmeta"><div class="cname">Evening Pottery</div><div class="cinfo">12 students · Tue &amp; Thu</div></div>
+            <div class="cstate hol">☂ holiday</div>
+          </div>
+          <div class="ccard">
+            <div class="cemoji" style="background:var(--blush-tint)">🎨</div>
+            <div class="cmeta"><div class="cname">Weekend Sketching</div><div class="cinfo">9 students · Sat</div></div>
+            <div class="cstate done">✓ done</div>
+          </div>
+          <div class="cta" style="margin-top:4px">＋  New class</div>
+          <div class="scrollfade"></div>
+        </div>
+        <div class="nav">
+          <a class="on"><span class="ic">▦</span>Classes</a>
+          <a><span class="ic">⚙</span>Settings</a>
+        </div>
+      </div><div class="caption">A1 · Home — a shelf of classes</div></div>
+
+      <!-- A2: New / edit class -->
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>✦ ✦ ✦</span></div>
+        <div class="appbar"><div class="app-hello">‹ Classes</div><div class="app-h">New Class</div></div>
+        <div class="body" style="padding-top:12px">
+          <div class="field"><div class="lab">Class name</div><div class="val">Evening Pottery</div></div>
+          <div class="field"><div class="lab">Note <span style="opacity:.7">(optional)</span></div><div class="val">Adults · Tue &amp; Thu</div></div>
+          <div class="lab" style="font-size:11px;color:var(--ink-soft);font-style:italic;margin:6px 2px 4px">Emoji</div>
+          <div class="picker">
+            <div class="swic">📕</div><div class="swic on">🏺</div><div class="swic">🎨</div><div class="swic">🎵</div><div class="swic">⚽</div>
+          </div>
+          <div class="lab" style="font-size:11px;color:var(--ink-soft);font-style:italic;margin:0 2px 4px">Colour</div>
+          <div class="picker">
+            <div class="swcol" style="background:var(--sage)"></div>
+            <div class="swcol on" style="background:var(--peach)"></div>
+            <div class="swcol" style="background:var(--blush)"></div>
+            <div class="swcol" style="background:var(--lav)"></div>
+          </div>
+          <div class="cta">Create class</div>
+          <p class="t-cap" style="text-align:center;margin-top:8px">add students next, or import a list <span class="q">(later)</span></p>
+        </div>
+        <div class="nav">
+          <a class="on"><span class="ic">▦</span>Classes</a>
+          <a><span class="ic">⚙</span>Settings</a>
+        </div>
+      </div><div class="caption">A2 · Make any kind of class</div></div>
+
+    </div>
+  </div>
+
+  <!-- ============ ROW B: INSIDE A CLASS — DAILY + CALENDAR ============ -->
+  <div class="stage">
+    <div class="row-label">Inside a class <span class="n">— the daily rhythm, and the month at a glance</span></div>
+    <div class="row-desc">Step into a class and you get four simple tabs: <b>Today</b> to mark attendance, <b>Calendar</b> to see and edit any day (holidays included), <b>Students</b> for the roster, <b>Reports</b> to export. Marking a day a holiday takes one tap and is painted clearly on the calendar.</div>
+
+    <div class="gallery">
+
+      <!-- B1: Today -->
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>✦ ✦ ✦</span></div>
+        <div class="appbar"><div class="app-hello">‹ Class VI‑A · Wed 17 Jun</div><div class="app-h">Today's Register</div></div>
+        <div class="body" style="padding-top:6px">
+          <div class="holbar">☂ no class today? <b>Mark holiday</b></div>
+          <div class="summary">
+            <div class="chip s"><span class="dot" style="background:var(--sage-deep)"></span>26 present</div>
+            <div class="chip b"><span class="dot" style="background:var(--blush-deep)"></span>3 absent</div>
+            <div class="chip p"><span class="dot" style="background:var(--peach-deep)"></span>1 late</div>
+          </div>
+          <div class="srow"><div class="avatar" style="background:#9DB79A">A</div><div class="who"><div class="nm">Aanya Rao</div><div class="rl">Roll 01</div></div><div class="seg"><div class="b p">P</div><div class="b">A</div><div class="b">L</div></div></div>
+          <div class="srow"><div class="avatar" style="background:#D29CA0">B</div><div class="who"><div class="nm">Bhuvan Iyer</div><div class="rl">Roll 02</div></div><div class="seg"><div class="b">P</div><div class="b a">A</div><div class="b">L</div></div></div>
+          <div class="srow"><div class="avatar" style="background:#C9A97A">C</div><div class="who"><div class="nm">Chitra Menon</div><div class="rl">Roll 03</div></div><div class="seg"><div class="b p">P</div><div class="b">A</div><div class="b">L</div></div></div>
+          <div class="srow"><div class="avatar" style="background:#A6A0C0">D</div><div class="who"><div class="nm">Dev Sharma</div><div class="rl">Roll 04</div></div><div class="seg"><div class="b">P</div><div class="b">A</div><div class="b l">L</div></div></div>
+          <div class="scrollfade"></div>
+        </div>
+        <div class="nav">
+          <a class="on"><span class="ic">✓</span>Today</a>
+          <a><span class="ic">▦</span>Calendar</a>
+          <a><span class="ic">❖</span>Students</a>
+          <a><span class="ic">▤</span>Reports</a>
+        </div>
+      </div><div class="caption">B1 · Today — tap to mark, auto‑saves</div></div>
+
+      <!-- B2: Calendar -->
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>✦ ✦ ✦</span></div>
+        <div class="appbar"><div class="app-hello">‹ Class VI‑A</div><div class="app-h">June 2026</div></div>
+        <div class="body" style="padding-top:8px">
+          <div class="calhead"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+          <div class="cal">
+            <div class="cell has"><span class="d">1</span><span class="mk"></span></div>
+            <div class="cell has"><span class="d">2</span><span class="mk"></span></div>
+            <div class="cell has"><span class="d">3</span><span class="mk"></span></div>
+            <div class="cell has"><span class="d">4</span><span class="mk"></span></div>
+            <div class="cell hol"><span class="d">5</span><span class="g">☂</span></div>
+            <div class="cell wknd"><span class="d">6</span></div>
+            <div class="cell wknd"><span class="d">7</span></div>
+            <div class="cell has"><span class="d">8</span><span class="mk"></span></div>
+            <div class="cell has"><span class="d">9</span><span class="mk"></span></div>
+            <div class="cell has"><span class="d">10</span><span class="mk"></span></div>
+            <div class="cell has"><span class="d">11</span><span class="mk"></span></div>
+            <div class="cell has"><span class="d">12</span><span class="mk"></span></div>
+            <div class="cell wknd"><span class="d">13</span></div>
+            <div class="cell wknd"><span class="d">14</span></div>
+            <div class="cell hol"><span class="d">15</span><span class="g">☂</span></div>
+            <div class="cell has"><span class="d">16</span><span class="mk"></span></div>
+            <div class="cell today"><span class="d">17</span><span class="mk" style="background:var(--sage-deep)"></span></div>
+            <div class="cell future"><span class="d">18</span></div>
+            <div class="cell future"><span class="d">19</span></div>
+            <div class="cell wknd"><span class="d">20</span></div>
+            <div class="cell wknd"><span class="d">21</span></div>
+            <div class="cell future"><span class="d">22</span></div>
+            <div class="cell future"><span class="d">23</span></div>
+            <div class="cell future"><span class="d">24</span></div>
+            <div class="cell future"><span class="d">25</span></div>
+            <div class="cell future"><span class="d">26</span></div>
+            <div class="cell wknd"><span class="d">27</span></div>
+            <div class="cell wknd"><span class="d">28</span></div>
+            <div class="cell future"><span class="d">29</span></div>
+            <div class="cell future"><span class="d">30</span></div>
+          </div>
+          <div class="legend">
+            <div class="lg"><span class="sw" style="background:var(--sage-tint)"></span>taken</div>
+            <div class="lg"><span class="sw" style="background:var(--peach-tint)"></span>☂ holiday</div>
+            <div class="lg"><span class="sw" style="background:#fff"></span>weekend</div>
+            <div class="lg"><span class="sw" style="outline:2px solid var(--sage-deep);outline-offset:-2px;background:#fff"></span>today</div>
+          </div>
+          <div class="daysheet">
+            <div class="dt">Mon · 15 June — Holiday</div>
+            <div class="act"><div class="a take">Take attendance</div><div class="a hol">✓ Holiday</div></div>
+          </div>
+        </div>
+        <div class="nav">
+          <a><span class="ic">✓</span>Today</a>
+          <a class="on"><span class="ic">▦</span>Calendar</a>
+          <a><span class="ic">❖</span>Students</a>
+          <a><span class="ic">▤</span>Reports</a>
+        </div>
+      </div><div class="caption">B2 · Calendar — holidays painted in peach</div></div>
+
+    </div>
+  </div>
+
+  <!-- ============ ROW C: ROSTER + REPORTS ============ -->
+  <div class="stage">
+    <div class="row-label">Roster &amp; reports <span class="n">— the whole point, out the door</span></div>
+    <div class="row-desc">The class roster carries roll numbers and guardian phones. At month's end, pick the month and export — <b>Excel</b> and <b>PDF</b> today, built on one shared report model so a new format drops in cleanly. Holidays are skipped in the school‑day count automatically.</div>
+
+    <div class="gallery">
+
+      <!-- C1: Students -->
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>✦ ✦ ✦</span></div>
+        <div class="appbar"><div class="app-hello">‹ Class VI‑A · 30 students</div><div class="app-h">Students</div></div>
+        <div class="body" style="padding-top:8px">
+          <div class="srow"><div class="avatar" style="background:#9DB79A">A</div><div class="who"><div class="nm">Aanya Rao</div><div class="rl">Roll 01 · ☎ guardian · 96%</div></div><div style="color:var(--ink-soft);font-size:18px">›</div></div>
+          <div class="srow"><div class="avatar" style="background:#D29CA0">B</div><div class="who"><div class="nm">Bhuvan Iyer</div><div class="rl">Roll 02 · ☎ guardian · 88%</div></div><div style="color:var(--ink-soft);font-size:18px">›</div></div>
+          <div class="srow"><div class="avatar" style="background:#C9A97A">C</div><div class="who"><div class="nm">Chitra Menon</div><div class="rl">Roll 03 · ☎ guardian · 92%</div></div><div style="color:var(--ink-soft);font-size:18px">›</div></div>
+          <div class="srow"><div class="avatar" style="background:#A6A0C0">D</div><div class="who"><div class="nm">Dev Sharma</div><div class="rl">Roll 04 · ☎ guardian · 79%</div></div><div style="color:var(--ink-soft);font-size:18px">›</div></div>
+          <div class="cta" style="margin-top:6px">＋  Add a student</div>
+          <div class="scrollfade"></div>
+        </div>
+        <div class="nav">
+          <a><span class="ic">✓</span>Today</a>
+          <a><span class="ic">▦</span>Calendar</a>
+          <a class="on"><span class="ic">❖</span>Students</a>
+          <a><span class="ic">▤</span>Reports</a>
+        </div>
+      </div><div class="caption">C1 · Students — roll no. + guardian</div></div>
+
+      <!-- C2: Reports -->
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>✦ ✦ ✦</span></div>
+        <div class="appbar"><div class="app-hello">‹ Class VI‑A</div><div class="app-h">Monthly Report</div></div>
+        <div class="body" style="padding-top:10px">
+          <div class="selector"><span class="arrows">‹</span><span class="mm">June 2026</span><span class="arrows">›</span></div>
+          <div class="statline">
+            <div class="stat"><div class="big">20</div><div class="lab">school days</div></div>
+            <div class="stat"><div class="big">91%</div><div class="lab">avg present</div></div>
+            <div class="stat"><div class="big">2</div><div class="lab">holidays</div></div>
+          </div>
+          <div class="rrow"><span class="nm">Aanya Rao</span><span class="bar"><i style="width:96%"></i></span><span class="pct">96%</span></div>
+          <div class="rrow"><span class="nm">Bhuvan Iyer</span><span class="bar"><i style="width:88%"></i></span><span class="pct">88%</span></div>
+          <div class="rrow"><span class="nm">Chitra Menon</span><span class="bar"><i style="width:92%"></i></span><span class="pct">92%</span></div>
+          <div class="rrow"><span class="nm">Dev Sharma</span><span class="bar"><i style="width:79%"></i></span><span class="pct">79%</span></div>
+          <div class="exports">
+            <div class="exp xls"><div class="t">Excel</div><div class="s">.xlsx sheet</div></div>
+            <div class="exp pdf"><div class="t">PDF</div><div class="s">print / share</div></div>
+          </div>
+        </div>
+        <div class="nav">
+          <a><span class="ic">✓</span>Today</a>
+          <a><span class="ic">▦</span>Calendar</a>
+          <a><span class="ic">❖</span>Students</a>
+          <a class="on"><span class="ic">▤</span>Reports</a>
+        </div>
+      </div><div class="caption">C2 · Reports — pick month, export</div></div>
+
+      <!-- C3: PDF preview -->
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>✦ ✦ ✦</span></div>
+        <div class="appbar"><div class="app-hello">share · print · save</div><div class="app-h">PDF Preview</div></div>
+        <div class="body" style="padding-top:8px">
+          <div class="pdfpage">
+            <div class="pdf-h"><div class="sch">Attendance Register</div><div class="meta">Class VI‑A · June 2026 · Ms. Kanishk</div></div>
+            <table class="grid">
+              <tr><th class="name" style="text-align:left">Name</th><th>3</th><th>4</th><th>5</th><th>8</th><th>9</th><th>…</th><th>P</th><th>%</th></tr>
+              <tr><td class="name">Aanya Rao</td><td class="P">P</td><td class="P">P</td><td class="H">H</td><td class="P">P</td><td class="P">P</td><td>…</td><td class="tot">19</td><td class="tot">96</td></tr>
+              <tr><td class="name">Bhuvan Iyer</td><td class="P">P</td><td class="A">A</td><td class="H">H</td><td class="P">P</td><td class="P">P</td><td>…</td><td class="tot">17</td><td class="tot">88</td></tr>
+              <tr><td class="name">Chitra Menon</td><td class="A">A</td><td class="P">P</td><td class="H">H</td><td class="P">P</td><td class="P">P</td><td>…</td><td class="tot">18</td><td class="tot">92</td></tr>
+              <tr><td class="name">Dev Sharma</td><td class="P">P</td><td class="P">P</td><td class="H">H</td><td class="A">A</td><td class="P">P</td><td>…</td><td class="tot">15</td><td class="tot">79</td></tr>
+              <tr><td class="name">Esha Patel</td><td class="P">P</td><td class="P">P</td><td class="H">H</td><td class="P">P</td><td class="P">P</td><td>…</td><td class="tot">20</td><td class="tot">100</td></tr>
+            </table>
+            <div class="pdf-foot"><span>H = holiday · generated 17 Jun 2026</span><span>YesMaam</span></div>
+          </div>
+          <div class="exports">
+            <div class="exp xls"><div class="t">Share</div><div class="s">WhatsApp · mail</div></div>
+            <div class="exp pdf"><div class="t">Save</div><div class="s">to device</div></div>
+          </div>
+        </div>
+        <div class="nav">
+          <a><span class="ic">✓</span>Today</a>
+          <a><span class="ic">▦</span>Calendar</a>
+          <a><span class="ic">❖</span>Students</a>
+          <a class="on"><span class="ic">▤</span>Reports</a>
+        </div>
+      </div><div class="caption">C3 · The artifact — a register, on paper</div></div>
+
+    </div>
+  </div>
+
+  <!-- ============ PANELS ============ -->
+  <div class="panels">
+    <div class="panel">
+      <h3>The palette</h3>
+      <div class="swatches">
+        <div class="sw2"><span class="chipc" style="background:#FBF7F0"></span> Cream — canvas <code>#FBF7F0</code></div>
+        <div class="sw2"><span class="chipc" style="background:#FFFDFA"></span> Paper — cards <code>#FFFDFA</code></div>
+        <div class="sw2"><span class="chipc" style="background:#B7CBB0"></span> Sage — present <code>#B7CBB0</code></div>
+        <div class="sw2"><span class="chipc" style="background:#E9BFC1"></span> Blush — absent <code>#E9BFC1</code></div>
+        <div class="sw2"><span class="chipc" style="background:#F2D2A9"></span> Peach — late / holiday <code>#F2D2A9</code></div>
+        <div class="sw2"><span class="chipc" style="background:#D3CBE4"></span> Lavender — accent <code>#D3CBE4</code></div>
+        <div class="sw2"><span class="chipc" style="background:#3E3A35"></span> Ink — text <code>#3E3A35</code></div>
+      </div>
+    </div>
+
+    <div class="panel type-spec">
+      <h3>The type</h3>
+      <p class="t-display">Fraunces</p>
+      <p class="t-cap" style="margin-top:-4px">display & headings — soft, bookish serif</p>
+      <p class="t-head" style="margin-top:14px">Lora Medium</p>
+      <p class="t-body">Lora carries the body text — warm, legible at small sizes on a phone.</p>
+      <p class="t-cap">“italics give it the handwritten‑register feel”</p>
+    </div>
+
+    <div class="panel">
+      <h3>What it does (v1)</h3>
+      <ul class="feat">
+        <li>Create any kind of class — school, course, club</li>
+        <li>Mark daily attendance in a tap (auto‑saves)</li>
+        <li>Present · Absent · Late</li>
+        <li>Mark holidays — clear on the calendar</li>
+        <li>Roster with roll no. + guardian phone</li>
+        <li>Monthly Excel (.xlsx) &amp; PDF export</li>
+        <li>Fully offline, all on‑device</li>
+        <li><span class="q">Extensible export engine (CSV / new layouts drop in)</span></li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>A few small calls left</h3>
+      <ul class="feat">
+        <li><span class="q">Holiday scope</span> — per‑class (pottery off but school on), or a shared “school holiday” for all? <i>I lean per‑class.</i></li>
+        <li><span class="q">Weekends</span> — auto‑skipped from school‑days, or only days you explicitly mark holiday?</li>
+        <li><span class="q">One person in two classes</span> — separate entries per class (simplest), or a shared person? <i>I lean separate.</i></li>
+        <li><span class="q">App name</span> — “YesMaam” stays, or just a working title?</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>Mockups for review · nothing here is built yet · confirm the direction and I'll turn it into a spec.</footer>
+
+</div>
+</body>
+</html>
