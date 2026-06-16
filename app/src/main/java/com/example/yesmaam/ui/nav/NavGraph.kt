@@ -29,7 +29,18 @@ fun YesMaamNavGraph() {
             val id = entry.arguments?.getLong("classId")?.takeIf { it >= 0 }
             com.example.yesmaam.ui.classes.ClassEditorScreen(classId = id, onDone = { nav.popBackStack() })
         }
-        // class home, settings composables are added in later tasks.
+        composable(
+            Routes.CLASS_HOME,
+            arguments = listOf(navArgument("classId") { type = NavType.LongType }),
+        ) { entry ->
+            val id = entry.arguments!!.getLong("classId")
+            com.example.yesmaam.ui.classroom.ClassHomeScreen(
+                classId = id,
+                onEditClass = { nav.navigate(Routes.classEditor(id)) },
+                onEditStudent = { sid -> nav.navigate(Routes.studentEditor(id, sid)) },
+            )
+        }
+        // settings composable is added in a later task.
     }
 }
 
