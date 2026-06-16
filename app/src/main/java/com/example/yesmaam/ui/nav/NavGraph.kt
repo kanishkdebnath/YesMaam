@@ -6,9 +6,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 @Composable
 fun YesMaamNavGraph() {
@@ -20,7 +22,14 @@ fun YesMaamNavGraph() {
                 onNewClass = { nav.navigate(Routes.classEditor(null)) },
             )
         }
-        // class editor, class home, settings composables are added in later tasks.
+        composable(
+            Routes.CLASS_EDITOR,
+            arguments = listOf(navArgument("classId") { type = NavType.LongType; defaultValue = -1L }),
+        ) { entry ->
+            val id = entry.arguments?.getLong("classId")?.takeIf { it >= 0 }
+            com.example.yesmaam.ui.classes.ClassEditorScreen(classId = id, onDone = { nav.popBackStack() })
+        }
+        // class home, settings composables are added in later tasks.
     }
 }
 
